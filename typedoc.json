@@ -1,0 +1,22 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "customCss": "./typedoc.theme.css",
+    "includeVersion": true,
+    "plugin": [
+        "@mxssfd/typedoc-theme"
+    ],
+    "theme": "my-theme",
+    "entryPoints": [
+        "./src/client/**/*.ts",
+        "./src/types/index.ts"
+    ],
+    "sort": [
+        "static-first",
+        "kind",
+        "enum-value-ascending"
+    ],
+    "out": "./docs",
+    "searchGroupBoosts": {
+        "Classes": 1.5
+    }
+}
