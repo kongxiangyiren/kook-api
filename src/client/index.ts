@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
-import { bot, type GetWsParam } from '../types';
+import { type bot, type GetWsParam } from '../types';
 import { Message } from './message';
 import { User } from './user';
 

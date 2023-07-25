@@ -10,7 +10,7 @@ export class Message {
     this.axios = axios;
   }
 
-  create(data: { type?: 1 | 2 | 9 | 10; target_id: string }) {
-    return this.axios('/api/v3/message/create');
+  async create(data: { type?: 1 | 2 | 3 | 9 | 10; target_id: string }) {
+    return await this.axios('/api/v3/message/create');
   }
 }

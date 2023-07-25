@@ -1,5 +1,5 @@
 import { type AxiosInstance } from 'axios';
-import { bot } from '../types';
+import { type bot } from '../types';
 
 /** 用户相关接口
  *

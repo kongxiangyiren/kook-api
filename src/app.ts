@@ -6,7 +6,8 @@ import { join } from 'path';
 
 const configPath = join(process.cwd(), '/config/config.js');
 if (!existsSync(configPath) || !require(configPath).token) {
-  if (!existsSync(configPath)) cpSync(join(__dirname, '../template/config.js'), configPath, { recursive: true });
+  if (!existsSync(configPath))
+    cpSync(join(__dirname, '../template/config.js'), configPath, { recursive: true });
   console.log(`请先配置${configPath}的token`);
   process.exit();
 }
@@ -22,7 +23,9 @@ async function run(): Promise<any> {
     console.error('[Error]', '超过最大重试次数');
     process.exit();
   }
-  const gateway = await client.Gateway().catch(err => console.error(err));
+  const gateway = await client.Gateway().catch(err => {
+    console.error(err);
+  });
 
   if (gateway && gateway.data && gateway.data.url) {
     const ws = new WebSocket(gateway.data.url);
@@ -33,7 +36,8 @@ async function run(): Promise<any> {
     });
 
     ws.on('message', (data: ArrayBuffer | string) => {
-      data = client.config.compress === 0 ? (data as string) : unzipSync(data as ArrayBuffer).toString();
+      data =
+        client.config.compress === 0 ? (data as string) : unzipSync(data as ArrayBuffer).toString();
       const msg = JSON.parse(data);
       if (msg.d.sessionId) client.config.sessionId = msg.d.sessionId;
       if (msg.sn) client.config.sn = msg.sn;
