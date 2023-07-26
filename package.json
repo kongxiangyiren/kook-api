@@ -10,10 +10,11 @@
     "./types"
   ],
   "scripts": {
-    "prepublish": "rimraf ./app && tsc",
-    "build": "rimraf ./app && tsc && npm pack",
+    "prepublish": "npm run clean && tsc",
+    "build": "npm run clean && tsc && npm pack",
     "lint": "eslint . --ext .js,.ts --fix --ignore-path .gitignore",
-    "doc": "typedoc"
+    "doc": "typedoc",
+    "clean": "rimraf ./app ./types"
   },
   "devDependencies": {
     "@mxssfd/typedoc-theme": "^1.1.2",
