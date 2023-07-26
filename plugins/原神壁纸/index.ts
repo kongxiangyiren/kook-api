@@ -1,6 +1,7 @@
 import KBot from '../../src/lib/KBot';
 import axios from 'axios';
 import { type Message } from '../../src/types';
+import { basename } from 'path';
 export default class extends KBot.plugin {
   constructor() {
     super([
@@ -27,7 +28,7 @@ export default class extends KBot.plugin {
       return;
     }
 
-    const data = await KBot.client.Assets.create(res.data);
+    const data = await KBot.client.Assets.create(res.data, basename(res.request.path));
     if (data.code !== 0) {
       await KBot.client.Message.create({
         type: 1,
