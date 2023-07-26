@@ -2,7 +2,7 @@ import KBot from './KBot';
 import WebSocket from 'ws';
 import { unzipSync } from 'zlib';
 import Init from './init';
-import { Message } from '../types';
+import { type Message } from '../types';
 
 // 记录重试次数
 let retry = 0;
