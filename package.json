@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "空巷一人",
   "scripts": {
-    "start": "ts-node ./src/app.ts",
+    "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
     "lint": "eslint . --ext .js,.ts --fix --ignore-path .gitignore"
   },
   "devDependencies": {
@@ -24,6 +24,7 @@
     "prettier": "^3.0.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "*"
   },
   "dependencies": {
@@ -34,6 +35,9 @@
     "prompts": "^2.4.2",
     "ws": "^8.13.0",
     "yaml": "^2.3.1"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "pre-commit": [
     "lint"

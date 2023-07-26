@@ -1,6 +1,5 @@
-import KBot from '../../src/lib/KBot';
+import KBot, { type Message } from '@src/KBot';
 import axios from 'axios';
-import { type Message } from '../../src/types';
 import { basename } from 'path';
 export default class extends KBot.plugin {
   constructor() {

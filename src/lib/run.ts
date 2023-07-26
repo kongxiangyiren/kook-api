@@ -1,4 +1,4 @@
-import KBot from './KBot';
+import KBot from '../KBot';
 import WebSocket from 'ws';
 import { unzipSync } from 'zlib';
 import Init from './init';

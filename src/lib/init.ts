@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 import lodash from 'lodash';
-import KBot from './KBot';
+import KBot from '../KBot';
 
 const Apps: Record<string, any> = {};
 let command: any[] = [];
