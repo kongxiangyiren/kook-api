@@ -2,6 +2,7 @@ import KBot from './KBot';
 import WebSocket from 'ws';
 import { unzipSync } from 'zlib';
 import Init from './init';
+import { Message } from '../types';
 
 // 记录重试次数
 let retry = 0;
@@ -46,6 +47,52 @@ export async function run(): Promise<any> {
       if (msg.d.sessionId) KBot.client.config.sessionId = msg.d.sessionId;
       if (msg.sn) KBot.client.config.sn = msg.sn;
 
+      if (msg.d.content) {
+        const message = (msg as Message).d;
+
+        let type = '';
+        switch (message.type) {
+          case 1:
+            type = '[文字消息]';
+            break;
+          case 2:
+            type = '[图片消息]';
+            break;
+          case 3:
+            type = '[视频消息]';
+            break;
+          case 4:
+            type = '[文件消息]';
+            break;
+          case 8:
+            type = '[音频消息]';
+            break;
+          case 9:
+            type = '[KMarkdown]';
+            break;
+          case 10:
+            type = '[card 消息]';
+            break;
+          case 255:
+            type = '[系统消息]';
+            break;
+          default:
+            type = '[文字消息]';
+            break;
+        }
+
+        console.log(
+          message.channel_type === 'GROUP' ? '[群聊]' : '[私聊]',
+          message.channel_type === 'GROUP'
+            ? (message.extra.guild_id, `[${message.extra.channel_name}]`)
+            : '',
+          `[${message.author_id}]`,
+
+          message.extra.author.username,
+          type,
+          `：${message.content}`
+        );
+      }
       //  返回消息处理
       await new Init().dealMsg(msg);
     });
