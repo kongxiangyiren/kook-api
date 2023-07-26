@@ -128,3 +128,4 @@ dist
 app/
 docs/
 config/
+pm2/
