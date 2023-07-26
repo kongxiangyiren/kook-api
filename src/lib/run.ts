@@ -52,6 +52,8 @@ export async function run(): Promise<any> {
 
     // ws 关闭
     ws.on('close', async () => {
+      console.log('[client]', 'ws链接关闭');
+
       KBot.client.config.resume = 1;
       return await run();
     });
