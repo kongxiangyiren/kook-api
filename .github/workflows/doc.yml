@@ -1,0 +1,33 @@
+name: GitHub Actions Build and Deploy Demo
+on:
+  push:
+    branches:
+      - kook-api # 这里表示push到master分支就会触发流程,请根据实际情况修改
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      # 这是github官方的一个action，用于clone该仓库的源码到工作流中，
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.0.2
+        with:
+          persist-credentials: false
+      # 安装node14
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      # 打包 命令请根据实际情况修改
+      - name: Install and Build
+        run: |
+          npm install
+          npm run doc
+      # 部署
+      - name: Deploy 🚀 # 部署
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        with:
+          branch: doc # 部署后提交到那个分支
+          folder: doc # 存放build后产物的目录
