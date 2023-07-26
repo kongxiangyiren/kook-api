@@ -50,36 +50,18 @@ export async function run(): Promise<any> {
       if (msg.d.content) {
         const message = (msg as Message).d;
 
-        let type = '';
-        switch (message.type) {
-          case 1:
-            type = '[文字消息]';
-            break;
-          case 2:
-            type = '[图片消息]';
-            break;
-          case 3:
-            type = '[视频消息]';
-            break;
-          case 4:
-            type = '[文件消息]';
-            break;
-          case 8:
-            type = '[音频消息]';
-            break;
-          case 9:
-            type = '[KMarkdown]';
-            break;
-          case 10:
-            type = '[card 消息]';
-            break;
-          case 255:
-            type = '[系统消息]';
-            break;
-          default:
-            type = '[文字消息]';
-            break;
-        }
+        const messageType = {
+          1: '[文字消息]',
+          2: '[图片消息]',
+          3: '[视频消息]',
+          4: '[文件消息]',
+          8: '[音频消息]',
+          9: '[KMarkdown]',
+          10: '[card 消息]',
+          255: '[系统消息]'
+        };
+
+        const type = messageType[message.type as 1 | 2 | 3 | 4 | 8 | 9 | 10 | 255] || '[文字消息]';
 
         console.log(
           message.channel_type === 'GROUP' ? '[群聊]' : '[私聊]',
