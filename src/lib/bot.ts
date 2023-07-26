@@ -1,7 +1,7 @@
 import { CreateAPI } from 'kook-api';
 import check from './check';
 import KBot from '../KBot';
-import { run as Run } from './run';
+import { createWs } from './createws';
 
 export default class Bot {
   async run() {
@@ -13,6 +13,6 @@ export default class Bot {
     // 创建 client
     KBot.client = CreateAPI(config.config);
     // 初始化ws
-    await Run();
+    await createWs();
   }
 }

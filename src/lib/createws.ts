@@ -2,12 +2,12 @@ import KBot from '../KBot';
 import WebSocket from 'ws';
 import { unzipSync } from 'zlib';
 import Init from './init';
-import { type Message } from '../types';
+import { type DMessage, type Message } from '../types';
 
 // 记录重试次数
 let retry = 0;
 let init = false;
-export async function run(): Promise<any> {
+export async function createWs(): Promise<any> {
   if (retry > 10) {
     console.error('[Error]', '超过最大重试次数');
     process.exit();
@@ -16,6 +16,7 @@ export async function run(): Promise<any> {
   const gateway = await KBot.client.Gateway().catch(err => {
     console.error(err);
   });
+  console.log(gateway);
 
   if (gateway && gateway.data && gateway.data.url) {
     const ws = new WebSocket(gateway.data.url);
@@ -47,8 +48,9 @@ export async function run(): Promise<any> {
       if (msg.d.sessionId) KBot.client.config.sessionId = msg.d.sessionId;
       if (msg.sn) KBot.client.config.sn = msg.sn;
 
-      if (msg.d.content) {
-        const message = (msg as Message).d;
+      // 获取消息 排除系统消息
+      if (msg.d.content && msg.d.type !== 255) {
+        const message = (msg as Message).d as DMessage;
 
         const messageType = {
           1: '[文字消息]',
@@ -81,13 +83,23 @@ export async function run(): Promise<any> {
 
     // ws 关闭
     ws.on('close', async () => {
+      retry++;
       console.log('[client]', 'ws链接关闭');
 
       KBot.client.config.resume = 1;
-      return await run();
+      return await createWs();
+    });
+
+    // ws 错误
+    ws.on('error', async () => {
+      retry++;
+      console.log('[client]', 'ws链接关闭');
+
+      KBot.client.config.resume = 1;
+      return await createWs();
     });
   } else {
     retry++;
-    return await run();
+    return await createWs();
   }
 }

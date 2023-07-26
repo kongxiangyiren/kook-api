@@ -14,8 +14,7 @@ export default class extends KBot.plugin {
   }
 
   async 原神壁纸(e: Message) {
-    // 频道消息
-    if (e.d.channel_type !== 'GROUP') {
+    if (e.d.channel_type !== 'GROUP' || e.d.type === 255) {
       return;
     }
 
