@@ -8,6 +8,8 @@
 
 ## 查看 api doc
 
+https://kook.kxyr.top
+
 ```sh
 npm run doc
 ```
