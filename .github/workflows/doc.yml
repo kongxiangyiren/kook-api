@@ -29,5 +29,5 @@ jobs:
       - name: Deploy 🚀 # 部署
         uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
-          branch: doc # 部署后提交到那个分支
-          folder: doc # 存放build后产物的目录
+          branch: docs # 部署后提交到那个分支
+          folder: docs # 存放build后产物的目录
