@@ -42,7 +42,7 @@ export interface systemMessage {
 }
 
 export interface DMessage {
-  channel_type: 'PERSON' | 'GROUP';
+  channel_type: 'PERSON' | 'GROUP' | 'BROADCAST ';
   type: 1 | 2 | 3 | 4 | 8 | 9 | 10;
   target_id: string;
   author_id: string;

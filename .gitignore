@@ -129,3 +129,6 @@ app/
 docs/
 config/
 pm2/
+!package/*.tgz
+data/
+environment/
