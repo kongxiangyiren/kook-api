@@ -46,7 +46,7 @@ export default class extends KBot.plugin {
           speaker: '派蒙',
           format: 'wav'
         },
-        3000
+        5000
       );
       if (!gen) {
         await KBot.client.Message.create({
