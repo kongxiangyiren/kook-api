@@ -44,7 +44,7 @@ export default class extends KBot.plugin {
         text: res.hitokoto,
         speaker: '派蒙',
         format: 'wav'
-      });
+      },3000);
       if (!gen) {
         await KBot.client.Message.create({
           type: 1,
