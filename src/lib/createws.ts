@@ -16,7 +16,7 @@ export async function createWs(): Promise<any> {
   const gateway = await KBot.client.Gateway().catch(err => {
     console.error(err);
   });
-  console.log(gateway);
+  // console.log(gateway);
 
   if (gateway && gateway.data && gateway.data.url) {
     const ws = new WebSocket(gateway.data.url);
