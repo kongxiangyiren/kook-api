@@ -34,7 +34,7 @@ export default class extends KBot.plugin {
       })
       .catch(err => err);
 
-    if (!res || res.data.code !== 1) {
+    if (!res || !res.data || res.data.code !== 1) {
       await KBot.client.Message.create({
         type: 1,
         target_id: e.d.target_id,
