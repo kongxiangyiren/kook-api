@@ -22,14 +22,17 @@ export default class extends KBot.plugin {
       .replace('/点歌', '')
       .trim();
 
-    const res = await axios.get(`https://api.f4team.cn/API/QQ_Music_new/`, {
-      params: {
-        msg,
-        n: 1,
-        //  音质，14：母带，11：无损，8：hq，4：标准，其余自测 一共有1-14
-        br: 7
-      }
-    });
+    const res = await axios
+      .get(`https://api.f4team.cn/API/QQ_Music_new/`, {
+        params: {
+          msg,
+          n: 1,
+          //  音质，14：母带，11：无损，8：hq，4：标准，其余自测 一共有1-14
+          br: 7
+        },
+        timeout: 3000
+      })
+      .catch(err => err);
 
     if (!res || res.data.code !== 1) {
       await KBot.client.Message.create({
