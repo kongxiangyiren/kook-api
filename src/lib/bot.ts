@@ -18,7 +18,7 @@ export default class Bot {
       console.log('ffmpeg下载失败');
     } else {
       console.log('ffmpeg下载成功');
-      
+
       if (process.platform === 'linux') {
         console.log('添加运行权限');
         execSync('chmod +x ' + ffmpegPath);
