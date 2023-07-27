@@ -40,11 +40,14 @@ export default class extends KBot.plugin {
     } else {
       /** 接口结果，json字符串转对象 */
       res = res.data;
-      const gen = await genshiTts({
-        text: res.hitokoto,
-        speaker: '派蒙',
-        format: 'wav'
-      },3000);
+      const gen = await genshiTts(
+        {
+          text: res.hitokoto,
+          speaker: '派蒙',
+          format: 'wav'
+        },
+        3000
+      );
       if (!gen) {
         await KBot.client.Message.create({
           type: 1,
