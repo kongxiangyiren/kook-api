@@ -34,7 +34,7 @@ export default class Bot {
     const PATH = process.env.PATH as string;
     const splitUp = process.platform === 'win32' ? ';' : ':';
     process.env.PATH = AddPATH.join(splitUp) + splitUp + PATH;
-    
+
     // 创建 client
     KBot.client = CreateAPI(config.config);
     // 初始化ws
