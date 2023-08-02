@@ -7,8 +7,8 @@ export async function downloadFfmpeg(): Promise<string | false> {
   return await new Promise((resolve, reject) => {
     const ffmpegPath =
       process.platform === 'win32'
-        ? join(process.cwd(), '/environment/ffmpeg.exe')
-        : join(process.cwd(), '/environment/ffmpeg');
+        ? join(process.cwd(), '/environment/ffmpeg/ffmpeg.exe')
+        : join(process.cwd(), '/environment/ffmpeg/ffmpeg');
     if (existsSync(ffmpegPath)) {
       resolve(ffmpegPath);
       return;

@@ -4,7 +4,8 @@ import KBot from '../KBot';
 import { createWs } from './createws';
 import { downloadFfmpeg } from './tools/ffmpeg';
 import { execSync } from 'child_process';
-
+import { dirname } from 'path';
+const AddPATH: string[] = [];
 export default class Bot {
   async run() {
     // 检查配置
@@ -23,9 +24,14 @@ export default class Bot {
         console.log('添加运行权限');
         execSync('chmod +x ' + ffmpegPath);
       }
-      KBot.ffmpegPath = ffmpegPath;
-    }
+      // 将ffmpeg添加到环境变量
+      AddPATH.push(dirname(ffmpegPath));
 
+      // KBot.ffmpegPath = ffmpegPath;
+    }
+    
+    const PATH = process.env.PATH as string;
+    process.env.PATH = AddPATH.join(';') + ';' + PATH;
     // 创建 client
     KBot.client = CreateAPI(config.config);
     // 初始化ws

@@ -59,21 +59,10 @@ export default class extends KBot.plugin {
         return false;
       }
 
-      if (!KBot.ffmpegPath) {
-        await KBot.client.Message.create({
-          type: 1,
-          quote: e.d.msg_id,
-          target_id: e.d.target_id,
-          content: res.hitokoto,
-          temp_target_id: e.d.author_id
-        });
-        return false;
-      }
       const wavData = new Readable();
       wavData.push(gen);
       wavData.push(null);
 
-      ffmpeg.setFfmpegPath(KBot.ffmpegPath);
       const mp3Path = join(process.cwd(), '/data/一言/一言.mp3');
       mkdirSync(dirname(mp3Path), { recursive: true });
       ffmpeg()
@@ -81,8 +70,8 @@ export default class extends KBot.plugin {
         .inputFormat('wav')
         .toFormat('mp3')
         .output(mp3Path)
-        .on('error', async () => {
-          console.error('发生错误');
+        .on('error', async err => {
+          console.error('发生错误', err.toString());
           await KBot.client.Message.create({
             type: 1,
             quote: e.d.msg_id,
@@ -120,15 +109,3 @@ export default class extends KBot.plugin {
     }
   }
 }
-
-// const data = await KBot.client.Assets.create(gen, '一言.mp3');
-// if (data.code !== 0) {
-//   await KBot.client.Message.create({
-//     type: 1,
-//     quote: e.d.msg_id,
-//     target_id: e.d.target_id,
-//     content: res.hitokoto,
-//     temp_target_id: e.d.author_id
-//   });
-//   return false;
-// }
