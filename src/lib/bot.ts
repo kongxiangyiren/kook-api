@@ -29,7 +29,7 @@ export default class Bot {
 
       // KBot.ffmpegPath = ffmpegPath;
     }
-    
+
     const PATH = process.env.PATH as string;
     process.env.PATH = AddPATH.join(';') + ';' + PATH;
     // 创建 client
