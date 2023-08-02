@@ -30,8 +30,11 @@ export default class Bot {
       // KBot.ffmpegPath = ffmpegPath;
     }
 
+    // 临时添加到环境变量
     const PATH = process.env.PATH as string;
-    process.env.PATH = AddPATH.join(';') + ';' + PATH;
+    const splitUp = process.platform === 'win32' ? ';' : ':';
+    process.env.PATH = AddPATH.join(splitUp) + splitUp + PATH;
+    
     // 创建 client
     KBot.client = CreateAPI(config.config);
     // 初始化ws
