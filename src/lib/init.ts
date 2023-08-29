@@ -113,7 +113,7 @@ export default class Init {
 
   // 消息处理
   async dealMsg(e: any) {
-    if (e.d.content)
+    if (e.d && e.d.content)
       for (const val of command) {
         let msg = e.d.content;
         // 去掉@机器人

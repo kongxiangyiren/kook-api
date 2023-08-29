@@ -45,11 +45,12 @@ export async function createWs(): Promise<any> {
           ? (data as string)
           : unzipSync(data as ArrayBuffer).toString();
       const msg = JSON.parse(data);
-      if (msg.d.sessionId) KBot.client.config.sessionId = msg.d.sessionId;
+
+      if (msg.d && msg.d.sessionId) KBot.client.config.sessionId = msg.d.sessionId;
       if (msg.sn) KBot.client.config.sn = msg.sn;
 
       // 获取消息 排除系统消息
-      if (msg.d.content && msg.d.type !== 255) {
+      if (msg.d && msg.d.content && msg.d.type !== 255) {
         const message = (msg as Message).d as DMessage;
 
         const messageType = {
@@ -80,7 +81,17 @@ export async function createWs(): Promise<any> {
       //  返回消息处理
       await new Init().dealMsg(msg);
     });
-
+    // 心跳定时发送
+    setInterval(() => {
+      if (!KBot.client.config.resume) {
+        ws.send(
+          JSON.stringify({
+            s: 2,
+            sn: KBot.client.config.sn
+          })
+        );
+      }
+    }, 30000);
     // ws 关闭
     ws.on('close', async () => {
       retry++;
