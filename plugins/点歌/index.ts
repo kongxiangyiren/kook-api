@@ -23,18 +23,17 @@ export default class extends KBot.plugin {
       .trim();
 
     const res = await axios
-      .get(`https://api.f4team.cn/API/QQ_Music_new/`, {
+      .get(`http://ovoa.cc/api/QQmusic.php`, {
         params: {
           msg,
           n: 1,
-          //  音质，14：母带，11：无损，8：hq，4：标准，其余自测 一共有1-14
-          br: 7
+          type: 'json'
         },
-        timeout: 3000
+        timeout: 10000
       })
       .catch(err => err);
 
-    if (!res || !res.data || res.data.code !== 1) {
+    if (!res || !res.data || res.data.code !== 200) {
       await KBot.client.Message.create({
         type: 1,
         target_id: e.d.target_id,
@@ -57,9 +56,9 @@ export default class extends KBot.plugin {
           modules: [
             {
               type: 'audio',
-              title: res.data.data.song,
-              src: res.data.data.music,
-              cover: res.data.data.picture
+              title: res.data.data.songname,
+              src: res.data.data.src,
+              cover: res.data.data.cover
             }
           ]
         }
