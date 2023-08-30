@@ -32,8 +32,8 @@ export default class extends KBot.plugin {
         type: 1,
         target_id: e.d.target_id,
         quote: e.d.msg_id,
-        content: '上传文件失败',
-        temp_target_id: e.d.author_id
+        content: '上传文件失败'
+        // temp_target_id: e.d.author_id
       });
       return false;
     }
@@ -43,8 +43,8 @@ export default class extends KBot.plugin {
       type: 2,
       //   quote: e.d.msg_id,
       target_id: e.d.target_id,
-      content: data.data?.url as string,
-      temp_target_id: e.d.author_id
+      content: data.data?.url as string
+      // temp_target_id: e.d.author_id
     });
     return true;
   }

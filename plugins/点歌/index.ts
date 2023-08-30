@@ -38,8 +38,8 @@ export default class extends KBot.plugin {
         type: 1,
         target_id: e.d.target_id,
         quote: e.d.msg_id,
-        content: '点歌接口错误',
-        temp_target_id: e.d.author_id
+        content: '点歌接口错误'
+        // temp_target_id: e.d.author_id
       });
       return false;
     }
@@ -62,8 +62,8 @@ export default class extends KBot.plugin {
             }
           ]
         }
-      ]),
-      temp_target_id: e.d.author_id
+      ])
+      // temp_target_id: e.d.author_id
     });
     return true;
   }
