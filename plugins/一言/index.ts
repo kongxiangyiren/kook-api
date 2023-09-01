@@ -84,7 +84,7 @@ export default class extends KBot.plugin {
         .on('end', async () => {
           console.log('转换完成');
           const data = await KBot.client.Assets.create(mp3Path, (res.hitokoto as string) + '.mp4');
-          if (data.code !== 0) {
+          if (!data || data.code !== 0) {
             await KBot.client.Message.create({
               type: 1,
               quote: e.d.msg_id,

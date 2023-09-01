@@ -27,7 +27,7 @@ export default class extends KBot.plugin {
     }
 
     const data = await KBot.client.Assets.create(res.data, basename(res.request.path));
-    if (data.code !== 0) {
+    if (!data || data.code !== 0) {
       await KBot.client.Message.create({
         type: 1,
         target_id: e.d.target_id,

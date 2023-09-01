@@ -38,6 +38,7 @@
     "typescript": "*"
   },
   "dependencies": {
+    "alemon-ffmpeg": "^1.0.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "fluent-ffmpeg": "^2.1.2",
