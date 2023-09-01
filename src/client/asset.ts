@@ -26,7 +26,7 @@ export class Assets {
   async create(
     /** file 可以是文件的绝对路径或者 Buffer */
     file: string | Buffer | Readable,
-    /** 上传后的文件名称 如果是文件路径就读取 ，默认为 file.bin */
+    /** 上传后的文件名称 如果没有会自动获取文件后缀名，默认为 file.bin */
     name: string = 'file.bin'
   ): Promise<
     | {
